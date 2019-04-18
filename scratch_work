@@ -1,0 +1,23 @@
+
+void calculate_d(mpz_t d, const mpz_t e, mpz_t s, const mpz_t phi, mpz_t t)
+{
+  int phi_int = mpz_get_ui(phi);
+  mpz_class divisor;
+  
+  do
+  {
+    mpz_gcd(divisor.get_mpz_t(), phi, d);
+    if (divisor != 1)
+    {
+      mpz_nextprime(e, e);
+      mpz_gcdext(d, s, t, e, phi);
+    }
+  }
+  while ( divisor != 1);
+
+  cout << "d is: " << d << endl;
+  cout << "s is: " << s << endl;
+  cout << "t is: " << t << endl;
+  cout << "Such that d =  e*s + phi*t = " << e << "*" << s << " + " << phi << "*" << t << endl;
+  
+}
